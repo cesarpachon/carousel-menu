@@ -1,0 +1,17 @@
+.carousel-menu{
+  background-color:lightgray;
+  padding: 10px 0 10px 0;
+  overflow: hidden;
+  height: 170px;
+}
+
+
+
+.carousel-menu-entry{
+  background-color:lightblue;
+  margin: 0 5px 0 5px;
+  width: 150px;
+  height: 150px;
+  float:left;
+
+}

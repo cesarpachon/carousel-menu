@@ -1,0 +1,14 @@
+{
+  "name": "carousel-menu",
+  "version": "0.0.1",
+  "dependencies": {
+    "grunt": "0.4.2",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-jshint": "^0.10.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-copy": "^0.7.0"
+  }
+}

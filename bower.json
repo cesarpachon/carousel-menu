@@ -1,0 +1,17 @@
+{
+  "name": "carousel-menu",
+  "version": "0.0.1",
+  "homepage": "https://github.com/cesarpachon/carousel-menu",
+  "authors": [
+    "cesarpachon <cesarpachon@gmail.com>"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "license": "Affero GPL v3",
+  "private": true,
+  "dependencies": {
+    "jquery-mobile-bower":"latest",
+    "jquery":"latest"
+  }
+}
