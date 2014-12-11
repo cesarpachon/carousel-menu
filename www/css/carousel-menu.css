@@ -1,17 +1,37 @@
+.carousel-menu-container{
+  position: relative;
+}
+
+
 .carousel-menu{
   background-color:lightgray;
   padding: 10px 0 10px 0;
   overflow: hidden;
   height: 170px;
+  position:absolute;
+  top:0;
+  left:0;
 }
 
-
+.carousel-menu-touchable{
+ background-color:lightgreen;
+  height: 170px;
+ width: 100%;
+  position:absolute;
+  top:0;
+  left:0;
+ z-index: 10;
+  opacity: 0;
+}
 
 .carousel-menu-entry{
   background-color:lightblue;
   margin: 0 5px 0 5px;
   width: 150px;
   height: 150px;
-  float:left;
+  float: left;
+}
 
+.carousel-menu-entry-selected{
+  background-color:darkblue !important;
 }
