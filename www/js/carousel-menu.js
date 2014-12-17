@@ -81,6 +81,7 @@ var CarouselMenu = (function($){
 
     //now we are going to build the menucontainer. the width must be enough to allocate all the items
     _menu = $(".carousel-menu");
+    _menu.empty();
     _menu.width(items.length*ITEM_WIDTH);
 
     _items = items;
@@ -93,7 +94,8 @@ var CarouselMenu = (function($){
   };
 
   /**
-  * we use this method to simulate clicking on the items
+  * we use this method to simulate clicking on the items. 
+  * the carousel will send a command through the listeners module
   */
   carouselMenu.prototype.on_end_drag = function(x){
     if(Math.abs(x - _startx) < 10){
@@ -101,11 +103,10 @@ var CarouselMenu = (function($){
       var dx = x - _parse_pix(_menu.css("left"));
       var index = Math.floor((dx / _menu.width())*_items.length);
 
-      $("#log").html( "click! x:"+x+ " startleft:"+_startleft + " index "+ index);
-
-
       _menu.find(".carousel-menu-entry").removeClass("carousel-menu-entry-selected");
       _menu.find(".carousel-menu-entry#"+_items[index].id).addClass("carousel-menu-entry-selected");
+      
+      Listeners._emit("carousel_menu", _items[index].id);
 
     }
   };
@@ -131,7 +132,7 @@ var CarouselMenu = (function($){
       dx = _touchable.width() - _menu.width();
     }
      _menu.css("left", dx);
-  }
+  };
 
   /**
   * string with px suffix
@@ -143,7 +144,7 @@ var CarouselMenu = (function($){
     }else{
       return strpx; //a number?
     }
-  };
+  }
 
   return carouselMenu;
 
