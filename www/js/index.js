@@ -17,7 +17,13 @@ $(document).bind("mobileinit", function(ev) {
 
   var listener = {};
 
-  listener.on_cmd_carousel_menu = function(ev){console.log(ev);}
+  listener.on_cmd_carousel_menu_enter = function(menuitem){
+    $("section#"+menuitem.id).show(200);
+  };
+
+  listener.on_cmd_carousel_menu_leave = function(menuitem){
+    $("section#"+menuitem.id).hide(200);
+  };
 
 
   Listeners._register(listener);

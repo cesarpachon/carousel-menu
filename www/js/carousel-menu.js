@@ -10,6 +10,8 @@ var CarouselMenu = (function($){
 
   var _items = null;
 
+  var _selecteditemindex = -1;
+
   /**
   * @param items: an array of objects with the labels for the menu
   */
@@ -123,14 +125,20 @@ var CarouselMenu = (function($){
   */
   carouselMenu.prototype.on_end_drag = function(x){
     if(Math.abs(x - _startx) < 10){
+
+      if(_selecteditemindex > -1){
+        Listeners._emit("carousel_menu_leave", _items[_selecteditemindex]);
+      }
+
+
       //who whas clicked?
       var dx = x - _parse_pix(_menu.css("left"));
-      var index = Math.floor((dx / _menu.width())*_items.length);
+      _selecteditemindex = Math.floor((dx / _menu.width())*_items.length);
 
       _menu.find(".carousel-menu-entry").removeClass("carousel-menu-entry-selected");
-      _menu.find(".carousel-menu-entry#"+_items[index].id).addClass("carousel-menu-entry-selected");
+      _menu.find(".carousel-menu-entry#"+_items[_selecteditemindex].id).addClass("carousel-menu-entry-selected");
 
-      Listeners._emit("carousel_menu", _items[index]);
+      Listeners._emit("carousel_menu_enter", _items[_selecteditemindex]);
 
     }
   };
