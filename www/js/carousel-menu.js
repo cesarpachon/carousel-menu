@@ -89,7 +89,19 @@ var CarouselMenu = (function($){
     _items = items;
 
     items.forEach(function(item){
-      var item = "<div id='"+item.id+"' class='carousel-menu-entry '><img src='img/"+item.icon+".png'/>"+item.label+"</div>";
+
+      //visible by default
+      if(typeof item.visible === "undefined"){
+        item.visible = true;
+      }
+
+      var style = "";
+
+      if(!item.visible){
+        style = "style='display:none;'";
+      }
+
+      var item = "<div id='"+item.id+"' class='carousel-menu-entry ' "+style+"><img src='img/"+item.icon+".png'/>"+item.label+"</div>";
       _menu.append(item);
     });
 
@@ -120,6 +132,29 @@ var CarouselMenu = (function($){
 
 
   /**
+  * hide/show a item
+  */
+  carouselMenu.prototype.enable_item = function(itemid, flag){
+    var item = this.get_item(itemid);
+    item.visible = flag;
+    _menu.find(".carousel-menu-entry#"+item.id).css("display", item.visible?"inline":"none");
+  };
+
+
+  /**
+  * just a getter by id
+  */
+  carouselMenu.prototype.get_item = function(itemid){
+    for(var i=0; i<_items.length; ++i){
+      if(_items[i].id === itemid){
+        return _items[i];
+      }
+    }
+  };
+
+
+
+  /**
   * we use this method to simulate clicking on the items.
   * the carousel will send a command through the listeners module
   */
@@ -133,12 +168,31 @@ var CarouselMenu = (function($){
 
       //who whas clicked?
       var dx = x - _parse_pix(_menu.css("left"));
-      _selecteditemindex = Math.floor((dx / _menu.width())*_items.length);
 
-      _menu.find(".carousel-menu-entry").removeClass("carousel-menu-entry-selected");
-      _menu.find(".carousel-menu-entry#"+_items[_selecteditemindex].id).addClass("carousel-menu-entry-selected");
 
-      Listeners._emit("carousel_menu_enter", _items[_selecteditemindex]);
+      var slot = Math.floor((dx / _menu.width())*_items.length);
+
+      console.log("start",slot);
+
+      //how many invisible items there are at the left of the clicked coordinate? increment index..
+      for(var i=0; i<slot; ++i){
+        if(!_items[i].visible) {
+          slot++;
+        }
+      }
+      //now, maybe the current slot is invisible too.. increment until find a visible one (or nothing?)
+      while(!_items[slot].visible && slot < _items.length){
+        slot++;
+      }
+
+      console.log("end",slot);
+
+      if(slot < _items.length){
+        _selecteditemindex = slot;
+        _menu.find(".carousel-menu-entry").removeClass("carousel-menu-entry-selected");
+        _menu.find(".carousel-menu-entry#"+_items[_selecteditemindex].id).addClass("carousel-menu-entry-selected");
+        Listeners._emit("carousel_menu_enter", _items[_selecteditemindex]);
+      }
 
     }
   };

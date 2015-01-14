@@ -28,6 +28,12 @@ $(document).bind("mobileinit", function(ev) {
 
   Listeners._register(listener);
 
+  $("input").on("change", function(ev){
+
+    carouselMenu.enable_item(ev.target.id ,$(ev.target).prop("checked"));
+
+  });
+
 
 });
 
