@@ -87,14 +87,38 @@ var CarouselMenu = (function($){
     _items = items;
 
     items.forEach(function(item){
-      var item = "<div id='"+item.id+"' class='carousel-menu-entry'>"+item.label+"</div>";
+      var item = "<div id='"+item.id+"' class='carousel-menu-entry '><img src='img/"+item.icon+".png'/>"+item.label+"</div>";
       _menu.append(item);
     });
 
   };
 
+
+ /**
+  * hide all icons.
+  */
+  carouselMenu.prototype.hide_icons = function(){
+    _menu.find(".carousel-menu-entry").hide();
+  };
+
+
   /**
-  * we use this method to simulate clicking on the items. 
+  * receive a list of icons ids to make visible. mark the first one as selected.
+  */
+  carouselMenu.prototype.show_icons = function(icons_list){
+    _menu.find(".carousel-menu-entry").removeClass("carousel-menu-entry-selected");
+    _menu.find(".carousel-menu-entry#menu_"+icons_list[0]).addClass("carousel-menu-entry-selected");
+
+    icons_list.forEach(function(iconid){
+      _menu.find(".carousel-menu-entry#menu_"+iconid).show(100);
+    });
+
+
+  };
+
+
+  /**
+  * we use this method to simulate clicking on the items.
   * the carousel will send a command through the listeners module
   */
   carouselMenu.prototype.on_end_drag = function(x){
@@ -105,8 +129,8 @@ var CarouselMenu = (function($){
 
       _menu.find(".carousel-menu-entry").removeClass("carousel-menu-entry-selected");
       _menu.find(".carousel-menu-entry#"+_items[index].id).addClass("carousel-menu-entry-selected");
-      
-      Listeners._emit("carousel_menu", _items[index].id);
+
+      Listeners._emit("carousel_menu", _items[index]);
 
     }
   };
