@@ -1,21 +1,23 @@
-.carousel-menu-container{
+.carousel-menu-container {
   position: relative;
+  height: 150px;
+  margin: 20px 0 20px 0;
 }
 
 
-.carousel-menu{
+.carousel-menu {
   background-color:lightgray;
   padding: 10px 0 10px 0;
   overflow: hidden;
-  height: 170px;
+  height: 130px;
   position:absolute;
   top:0;
   left:0;
 }
 
-.carousel-menu-touchable{
+.carousel-menu-touchable {
  background-color:lightgreen;
-  height: 170px;
+  height: 130px;
  width: 100%;
   position:absolute;
   top:0;
@@ -24,14 +26,30 @@
   opacity: 0;
 }
 
-.carousel-menu-entry{
-  background-color:lightblue;
+.carousel-menu-entry {
+  background-color:#f6f6f6;
   margin: 0 5px 0 5px;
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 80px;
   float: left;
+  text-align: center;
+  padding: 20px;
+
 }
 
-.carousel-menu-entry-selected{
-  background-color:darkblue !important;
+.carousel-menu-entry-selected {
+  background-color:#75a5ff !important;
+  color: whitesmoke;
+}
+
+
+.carousel-page-container {
+  clear:both;
+}
+
+
+.carousel-menu-entry img {
+  width: 50px;
+  margin: 0 auto 10px auto;
+  display: block;
 }
