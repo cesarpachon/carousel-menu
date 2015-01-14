@@ -14,6 +14,15 @@ $(document).bind("mobileinit", function(ev) {
     {id: "item6", label: "item6"}
   ]);
 
+
+  var listener = {};
+
+  listener.on_cmd_carousel_menu = function(ev){console.log(ev);}
+
+
+  Listeners._register(listener);
+
+
 });
 
 
