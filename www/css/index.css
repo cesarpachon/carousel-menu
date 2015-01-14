@@ -1,6 +1,16 @@
+.body_background {
+  background-color: gray;
+}
+
+#page_main {
+  min-height: 1394px;
+  max-width: 500px;
+  /*margin-left: 100px;*/
+}
+
 section {
-margin: 10px 0px;
-background-color: lightblue;
-padding: 40px 10px;
-display: none;
+  margin: 10px 0px;
+  background-color: lightblue;
+  padding: 40px 10px;
+  display: none;
 }

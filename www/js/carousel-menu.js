@@ -161,18 +161,17 @@ var CarouselMenu = (function($){
   carouselMenu.prototype.on_end_drag = function(x){
     if(Math.abs(x - _startx) < 10){
 
+      var leaveindex = -1;
+
       if(_selecteditemindex > -1){
-        Listeners._emit("carousel_menu_leave", _items[_selecteditemindex]);
+        leaveindex = _selecteditemindex;
       }
 
-
       //who whas clicked?
-      var dx = x - _parse_pix(_menu.css("left"));
+      var dx = x - _parse_pix(_menu.css("left")) /*+ (_menu.width()/_items.length)>>1*/;
+      var slot = Math.min(_items.length-1, Math.floor((dx / _menu.width())*_items.length));
 
-
-      var slot = Math.floor((dx / _menu.width())*_items.length);
-
-      console.log("start",slot);
+      console.log("slot before", slot);
 
       //how many invisible items there are at the left of the clicked coordinate? increment index..
       for(var i=0; i<slot; ++i){
@@ -181,16 +180,17 @@ var CarouselMenu = (function($){
         }
       }
       //now, maybe the current slot is invisible too.. increment until find a visible one (or nothing?)
-      while(!_items[slot].visible && slot < _items.length){
+      while(slot < _items.length && !_items[slot].visible){
         slot++;
       }
 
-      console.log("end",slot);
+      console.log("slot after ", slot);
 
-      if(slot < _items.length){
+      if(slot < _items.length && (slot != leaveindex)){
         _selecteditemindex = slot;
         _menu.find(".carousel-menu-entry").removeClass("carousel-menu-entry-selected");
         _menu.find(".carousel-menu-entry#"+_items[_selecteditemindex].id).addClass("carousel-menu-entry-selected");
+        if(leaveindex > -1) Listeners._emit("carousel_menu_leave", _items[leaveindex]);
         Listeners._emit("carousel_menu_enter", _items[_selecteditemindex]);
       }
 
