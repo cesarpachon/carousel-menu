@@ -120,11 +120,24 @@ var CarouselMenu = (function($){
   * receive a list of icons ids to make visible. mark the first one as selected.
   */
   carouselMenu.prototype.show_icons = function(icons_list){
-    _menu.find(".carousel-menu-entry").removeClass("carousel-menu-entry-selected");
-    _menu.find(".carousel-menu-entry#menu_"+icons_list[0]).addClass("carousel-menu-entry-selected");
 
+    //first mark all as invisible..
+    _items.forEach(function(item){
+      item.visible = false;
+    });
+
+    _menu.find(".carousel-menu-entry")
+      .removeClass("carousel-menu-entry-selected")
+      .css("display", "none");
+
+
+    _selecteditemindex = 0;
+    _menu.find(".carousel-menu-entry#menu_"+icons_list[_selecteditemindex]).addClass("carousel-menu-entry-selected");
+
+    var self=this;
     icons_list.forEach(function(iconid){
-      _menu.find(".carousel-menu-entry#menu_"+iconid).show(100);
+      self.enable_item("menu_"+iconid, true);
+      //_menu.find(".carousel-menu-entry#menu_"+iconid).show(100);
     });
 
 
@@ -171,8 +184,6 @@ var CarouselMenu = (function($){
       var dx = x - _parse_pix(_menu.css("left")) /*+ (_menu.width()/_items.length)>>1*/;
       var slot = Math.min(_items.length-1, Math.floor((dx / _menu.width())*_items.length));
 
-      console.log("slot before", slot);
-
       //how many invisible items there are at the left of the clicked coordinate? increment index..
       for(var i=0; i<slot; ++i){
         if(!_items[i].visible) {
@@ -183,8 +194,6 @@ var CarouselMenu = (function($){
       while(slot < _items.length && !_items[slot].visible){
         slot++;
       }
-
-      console.log("slot after ", slot);
 
       if(slot < _items.length && (slot != leaveindex)){
         _selecteditemindex = slot;
