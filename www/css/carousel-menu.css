@@ -2,7 +2,6 @@
 .carousel-menu-container {
 position: relative;
 height: 6em;
-/*margin: .2em 0;*/
 }
 
 
@@ -13,6 +12,8 @@ height: 6em;
   height: 5em;
   position: absolute;
   top: 0;
+  left:0;
+
 }
 
 .carousel-menu-touchable {
