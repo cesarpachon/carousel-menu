@@ -1,7 +1,62 @@
+/*EM*/
+.carousel-menu-container {
+position: relative;
+height: 6em;
+/*margin: .2em 0;*/
+}
+
+
+.carousel-menu {
+  background-color: lightgray;
+  padding: .4em 0;
+  overflow: hidden;
+  height: 5em;
+  position: absolute;
+  top: 0;
+}
+
+.carousel-menu-touchable {
+  background-color: lightgreen;
+height: 2em;
+width: 100%;
+position: absolute;
+top: 0;
+left: 0;
+z-index: 10;
+opacity: 0;
+}
+
+.carousel-menu-entry {
+  background-color: #f6f6f6;
+  margin: 0 0.2em;
+  width: 3em;
+  height: 3em;
+  float: left;
+  text-align: center;
+  padding: 1em;
+}
+
+.carousel-menu-entry-selected {
+  background-color:#75a5ff !important;
+  color: whitesmoke;
+}
+
+
+.carousel-page-container {
+  clear:both;
+}
+
+
+.carousel-menu-entry img {
+  width:2em;
+  margin: 0 auto 0.5em auto;
+  display: block;
+}
+
+/*ORIGINAL
 .carousel-menu-container {
   position: relative;
   height: 150px;
-  margin: 20px 0 20px 0;
 }
 
 
@@ -53,3 +108,4 @@
   margin: 0 auto 10px auto;
   display: block;
 }
+*/

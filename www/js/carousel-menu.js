@@ -1,4 +1,5 @@
 var CarouselMenu = (function($){
+  "use strict";
 
   var ITEM_WIDTH = 150+10; //px.. width plus margins
 
@@ -118,8 +119,10 @@ var CarouselMenu = (function($){
 
   /**
   * receive a list of icons ids to make visible. mark the first one as selected.
+  * @param icons_list array of strings with the list of icon labels to make visible
+  * @param selectedname string with the icon label that must appear as selected
   */
-  carouselMenu.prototype.show_icons = function(icons_list){
+  carouselMenu.prototype.show_icons = function(icons_list, selectedname){
 
     //first mark all as invisible..
     _items.forEach(function(item){
@@ -131,8 +134,12 @@ var CarouselMenu = (function($){
       .css("display", "none");
 
 
-    _selecteditemindex = 0;
-    _menu.find(".carousel-menu-entry#menu_"+icons_list[_selecteditemindex]).addClass("carousel-menu-entry-selected");
+    for(_selecteditemindex = 0; _selecteditemindex < _items.length; ++_selecteditemindex){
+      if(_items[_selecteditemindex].id === selectedname){
+        _menu.find(".carousel-menu-entry#menu_"+selectedname).addClass("carousel-menu-entry-selected");
+        break;
+      }
+    }
 
     var self=this;
     icons_list.forEach(function(iconid){
@@ -199,7 +206,9 @@ var CarouselMenu = (function($){
         _selecteditemindex = slot;
         _menu.find(".carousel-menu-entry").removeClass("carousel-menu-entry-selected");
         _menu.find(".carousel-menu-entry#"+_items[_selecteditemindex].id).addClass("carousel-menu-entry-selected");
-        if(leaveindex > -1) Listeners._emit("carousel_menu_leave", _items[leaveindex]);
+        if(leaveindex > -1){
+          Listeners._emit("carousel_menu_leave", _items[leaveindex]);
+        }
         Listeners._emit("carousel_menu_enter", _items[_selecteditemindex]);
       }
 
