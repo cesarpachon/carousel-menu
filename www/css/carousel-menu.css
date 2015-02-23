@@ -18,7 +18,7 @@ height: 6em;
 
 .carousel-menu-touchable {
   background-color: lightgreen;
-height: 2em;
+height: 5.5em;
 width: 100%;
 position: absolute;
 top: 0;
@@ -28,6 +28,7 @@ opacity: 0;
 }
 
 .carousel-menu-entry {
+
   background-color: #f6f6f6;
   margin: 0 0.2em;
   width: 3em;

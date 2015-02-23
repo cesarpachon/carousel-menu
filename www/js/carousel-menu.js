@@ -1,7 +1,7 @@
 var CarouselMenu = (function($){
   "use strict";
 
-  var ITEM_WIDTH = 150+10; //px.. width plus margins
+  //var ITEM_WIDTH = 150+10; //px.. width plus margins
 
   var _touchable = null;
   var _menu = null;
@@ -85,7 +85,8 @@ var CarouselMenu = (function($){
     //now we are going to build the menucontainer. the width must be enough to allocate all the items
     _menu = $(".carousel-menu");
     _menu.empty();
-    _menu.width(items.length*ITEM_WIDTH);
+
+    var _$lastitem;
 
     _items = items;
 
@@ -102,9 +103,19 @@ var CarouselMenu = (function($){
         style = "style='display:none;'";
       }
 
-      var item = "<div id='"+item.id+"' class='carousel-menu-entry ' "+style+"><img src='img/"+item.icon+".png'/>"+item.label+"</div>";
-      _menu.append(item);
+      _$lastitem = $("<div id='"+item.id+"' class='carousel-menu-entry ' "+style+"><img src='img/"+item.icon+".png'/>"+item.label+"</div>");
+      _menu.append(_$lastitem);
     });
+
+    //we are going to use lastitem to transform ems to pixels..
+    var item_width = _$lastitem.width()
+    + _parse_pix(_$lastitem.css('margin-right'))
+    + _parse_pix(_$lastitem.css('margin-left'))
+    + _parse_pix(_$lastitem.css('padding-right'))
+    + _parse_pix(_$lastitem.css('padding-left'));
+
+    _menu.width((items.length)*item_width);
+
 
   };
 
