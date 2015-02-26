@@ -6,12 +6,12 @@ $(document).bind("mobileinit", function(ev) {
   console.log("mobile init!");
 
   var carouselMenu = new CarouselMenu([
-    {id: "item1", label: "item 1", icon: "icon0"},
-    {id: "item2", label: "item 2", icon: "icon1"},
-    {id: "item3", label: "item 3", icon: "icon2"},
-    {id: "item4", label: "item 4", icon: "icon3"},
-    {id: "item5", label: "item 5", icon: "icon4"},
-    {id: "item6", label: "item 6", icon: "icon5"}
+    {id: "item1", label: "item 1 longname", icon: "icon0"},
+    {id: "item2", label: "item 2 longname", icon: "icon1"},
+    {id: "item3", label: "item 3 longname", icon: "icon2"},
+    {id: "item4", label: "item 4 longname", icon: "icon3"},
+    {id: "item5", label: "item 5 longname", icon: "icon4"},
+    {id: "item6", label: "item 6 longname", icon: "icon5"}
   ]);
 
 

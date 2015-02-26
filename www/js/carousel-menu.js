@@ -209,11 +209,11 @@ var CarouselMenu = (function($){
         }
       }
       //now, maybe the current slot is invisible too.. increment until find a visible one (or nothing?)
-      while(slot < _items.length && !_items[slot].visible){
+      while(slot > -1 && slot < _items.length && !_items[slot].visible){
         slot++;
       }
 
-      if(slot < _items.length && (slot != leaveindex)){
+      if(slot > -1 && slot < _items.length && (slot != leaveindex)){
         _selecteditemindex = slot;
         _menu.find(".carousel-menu-entry").removeClass("carousel-menu-entry-selected");
         _menu.find(".carousel-menu-entry#"+_items[_selecteditemindex].id).addClass("carousel-menu-entry-selected");
@@ -222,7 +222,6 @@ var CarouselMenu = (function($){
         }
         Listeners._emit("carousel_menu_enter", _items[_selecteditemindex]);
       }
-
     }
   };
 
@@ -237,8 +236,15 @@ var CarouselMenu = (function($){
 
 
   /**
+  *
   */
   carouselMenu.prototype.on_drag = function(x, y){
+
+    //exit early if screen is wider than menu (prevent dragging)
+    if(_touchable.width() > _menu.width()){
+      return;
+    }
+
     var dx = (x - _startx) + _startleft;
     if(dx > 0){
       dx = 0;
