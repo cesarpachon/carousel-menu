@@ -1,4 +1,99 @@
-/*EM*/
+/*RESPONSIVE*/
+  .carousel-menu-container {
+  position: relative;
+  height: 6em;
+  }
+
+
+  .carousel-menu {
+    background-color: lightgray;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left:0;
+  }
+
+  .carousel-menu-touchable {
+    background-color: lightgreen;
+  height: 5.5em;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  opacity: 0;
+  }
+
+  .carousel-menu-entry {
+    background-color: #f6f6f6;
+    width: 4em;
+    height: 4em;
+    float: left;
+    text-align: center;
+  }
+
+  .carousel-menu-entry-selected {
+    background-color:#75a5ff !important;
+    color: whitesmoke;
+  }
+
+
+  .carousel-page-container {
+    clear:both;
+  }
+
+
+  .carousel-menu-entry img {
+    display: block;
+  }
+
+/*BIG SCREENS*/
+@media screen and (min-width: 600px) {
+
+  .carousel-menu {
+    padding: .4em 0;
+    height: 6em;
+  }
+
+  .carousel-menu-entry {
+    margin: 0 0.2em;
+    padding: 1em;
+  }
+
+  .carousel-menu-entry img {
+    width:2em;
+    margin: 0 auto 0.5em auto;
+  }
+
+
+
+}
+
+
+/*small screens*/
+@media screen and (max-width: 600px) {
+
+  .carousel-menu {
+    padding: .4em 0;
+    height: 4em;
+  }
+
+  .carousel-menu-entry {
+    margin: 0 0.1em;
+    padding: 0.5em;
+    font-size: 0.8em;
+  }
+
+  .carousel-menu-entry img {
+    width:1.5em;
+    margin: 0 auto 0.35em auto;
+  }
+
+
+}
+
+
+/*EM
 .carousel-menu-container {
 position: relative;
 height: 6em;
@@ -54,6 +149,7 @@ opacity: 0;
   margin: 0 auto 0.5em auto;
   display: block;
 }
+*/
 
 /*ORIGINAL
 .carousel-menu-container {
